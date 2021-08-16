@@ -21,6 +21,26 @@ const chart = new Chart(ctx, {
   }
 })
 
+
+const ctx2 = document.getElementById('myChart2').getContext('2d');
+const chart2 = new Chart(ctx2, {
+  type: 'doughnut',
+  data: {
+    labels: ['Yellow'],
+    datasets: [{
+      label: 'sentiment',
+      data: [0, 0],
+      backgroundColor: [
+        'rgba(255, 206, 86, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 206, 86, 1)',
+      ],
+      borderWidth: 1
+    }]
+  }
+})
+
 const submitReview = (e) => {
   e.preventDefault();
   const review = document.getElementById('review').value;
@@ -57,9 +77,23 @@ const submitReview = (e) => {
 
       chart.data.datasets.forEach(dataset => {
         dataset.data = [intensity.neg, intensity.neu, intensity.pos]
-        console.log(dataset.data)
       })
       chart.update()
+
+      chart2.data.datasets.forEach(dataset => {
+        if (intensity.compound < 0) {
+          dataset.backgroundColor = ['rgba(255, 99, 132, 0.2)', 'rgba(255, 206, 86, 0.2)']
+          dataset.borderColor = ['rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)']
+        } else if (intensity.compound === 0) {
+          dataset.backgroundColor = ['rgba(255, 206, 86, 0.2)']
+          dataset.borderColor = ['rgba(255, 206, 86, 1)']
+        } else {
+          dataset.backgroundColor = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 206, 86, 0.2)']
+          dataset.borderColor = ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 0.2)']
+        }
+        dataset.data = [intensity.compound, 1-Math.abs(intensity.compound)]
+      })
+      chart2.update()
 
     })
     .catch(err => {
