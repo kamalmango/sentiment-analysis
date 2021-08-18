@@ -20,11 +20,6 @@ canvas {
 	align-items: center;
 }
 
-.emoji {
-	position: absolute;
-	top: 470px;
-}
-
 .logo {
 	position: absolute;
 	height: 100px;
