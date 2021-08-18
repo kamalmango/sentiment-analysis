@@ -2,7 +2,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
 const chart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ['Red', 'Yellow', 'Green'],
+    //labels: ['Red', 'Yellow', 'Green'],
     datasets: [{
       label: 'sentiment',
       data: [0, 0, 0],
@@ -26,7 +26,7 @@ const ctx2 = document.getElementById('myChart2').getContext('2d');
 const chart2 = new Chart(ctx2, {
   type: 'doughnut',
   data: {
-    labels: ['Yellow'],
+    //labels: ['Yellow'],
     datasets: [{
       label: 'sentiment',
       data: [0, 0],
