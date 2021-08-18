@@ -12,6 +12,11 @@ const comments = [
   'hi there how are you'
 ]
 
+comments.forEach(comment => {
+  var comments = document.getElementById('comments')
+  comments.innerHTML += '<p>'+ comment +'</p>'
+})
+
 const ctx = document.getElementById('myChart').getContext('2d');
 const chart = new Chart(ctx, {
   type: 'doughnut',
@@ -57,6 +62,14 @@ fetch('/api/nlp/top-comments', options)
   .then(res => res.json())
   .then(results => {
     console.log('wooohoooooooo', results)
+    results.forEach(result => {
+      // var comments = document.getElementById('comments')
+      // var content = document.createTextNode(result.comment)
+      // comments.appendChild(content)
+
+      var topComments = document.getElementById('top-comments')
+      topComments.innerHTML += '<p>'+ result.comment +'</p>'
+    })
   })
 
 
