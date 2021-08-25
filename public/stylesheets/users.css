@@ -30,12 +30,22 @@ canvas {
 	right: 20px;
 }
 
-.comments {
+.commentSection {
 	/*position: absolute;*/
-	margin-top: 300px;
+	margin-top: 150px;
 }
 
-.top-comments {
+.topCommentSection {
 	/*position: absolute;*/
-	margin-top: 300px;
+	margin-top: 150px;
+}
+
+.inputArea {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	font-size: 18px;
 }

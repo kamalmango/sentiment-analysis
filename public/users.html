@@ -7,21 +7,26 @@
 
 <body>
   <img src="images/kanteraLogoBlack.png" class="logo" />
-
-  <!-- <input type="text" id="input"> -->
+  <div class="inputArea">
+    <h2 id="title">Add Social Media Comment Here</h2> 
+    <input type="text" id="input" size="50">
+  </div>
 
   <div class="main">
-    <div class="comments" id="comments">
+    <div class="commentSection">
       <h3>Comments</h3>
+      <div class="comments" id="comments">
+      </div>
     </div>
 
-    <div>
-      <h1 id="title">Sentiment Analysis</h1>
+    <div class='sentimentChart'>
       <canvas id="myChart" width="200" height="200"></canvas>
     </div>
 
-    <div class="top-comments" id="top-comments">
+    <div class="topCommentSection">
       <h3>Top Comments</h3>
+      <div class="top-comments" id="top-comments">
+      </div>
     </div>
   </div>
 

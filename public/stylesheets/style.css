@@ -22,7 +22,7 @@ canvas {
 
 .emoji {
 	position: absolute;
-	top: 470px;
+	top: 485px;
 }
 
 .logo {
@@ -31,4 +31,12 @@ canvas {
 	width: 100px;
 	top: 0px;
 	right: 20px;
+}
+
+textarea {
+	font-size: 18px;
+}
+
+textarea:focus {
+	outline: none;
 }

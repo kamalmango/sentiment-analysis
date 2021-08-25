@@ -1,20 +1,16 @@
-// const comments = {'youtube': [
-//   'I love this product',
-//   'I hate this product',
-//   'this is amazing',
-//   'hi there how are you'
-// ]}
-
 const comments = [
-  'I love this product',
-  'I hate this product',
+  'I love this!!',
+  'I hate this',
   'this is amazing',
   'hi there how are you'
 ]
 
+var commentSection = document.getElementById('comments')
+var topComments = document.getElementById('top-comments')
+var inputText = document.getElementById('input')
+
 comments.forEach(comment => {
-  var comments = document.getElementById('comments')
-  comments.innerHTML += '<p>'+ comment +'</p>'
+  commentSection.innerHTML += '<p>'+ comment +'</p>'
 })
 
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -61,15 +57,50 @@ fetch('/api/nlp/bulk-analyzer', options)
 fetch('/api/nlp/top-comments', options)
   .then(res => res.json())
   .then(results => {
-    console.log('wooohoooooooo', results)
-    results.forEach(result => {
-      // var comments = document.getElementById('comments')
-      // var content = document.createTextNode(result.comment)
-      // comments.appendChild(content)
-
-      var topComments = document.getElementById('top-comments')
-      topComments.innerHTML += '<p>'+ result.comment +'</p>'
-    })
+    for (var i = 0; i < 2; i++) {
+      topComments.innerHTML += '<p>'+ results[i].comment +'</p>'
+    }
   })
+
+
+const submitComment = () => {
+  const comment = document.getElementById('input').value
+  commentSection.innerHTML += '<p>'+ comment +'</p>'
+  comments.push(comment)
+
+  const options2 = {
+    method: 'POST',
+    body: JSON.stringify(comments),
+    headers: new Headers({ 'Content-Type': 'application/json' })
+  }
+
+  fetch('/api/nlp/bulk-analyzer', options2)
+  .then(res => res.json())
+  .then(results => {
+    console.log('ressulltsss', results)
+    chart.data.datasets.forEach(dataset => {
+      dataset.data = [results.negFraction, results.neuFraction, results.posFraction]
+    })
+    chart.update()
+  })
+
+  topComments.innerHTML = ''
+
+  fetch('/api/nlp/top-comments', options2)
+  .then(res => res.json())
+  .then(results => {
+    for (var i = 0; i < 2; i++) {
+      topComments.innerHTML += '<p>'+ results[i].comment +'</p>'
+    }
+  })
+  inputText.value = ''
+
+}
+
+document.getElementById('input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    submitComment()
+  }
+})
 
 
